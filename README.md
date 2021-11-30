@@ -1,1 +1,1 @@
-![alt text](swagger.png)
+![swagger](swagger.png)
