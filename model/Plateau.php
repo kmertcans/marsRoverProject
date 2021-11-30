@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @OA\Info(title="API TEST", version="0.1")
+ */
 /* 
  * // Editor: Kemal Mertcan SAGUN //
  */
@@ -14,6 +16,25 @@ class Plateau {
     private $maxY;
     private $rovers;
 
+    
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/getPlateau.php",
+    *          tags={"Plateaus"},
+    *          @OA\RequestBody(
+    *              description="Takes plateau id",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="plateauId", type="number"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     ),
+    * )
+    */
     public function getPlateau($plateauId) {
         $this->id = $plateauId;
         $memcacheModel = new Memcache();
@@ -61,6 +82,25 @@ class Plateau {
         return $counter;
     }
     
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/createPlateau.php",
+    *          tags={"Plateaus"},
+    *          @OA\RequestBody(
+    *              description="Creates a plateau",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="x", type="number"),
+    *             @OA\Property(property="y", type="number"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     )
+    * )
+    */
     public function setPlateauData($id, $name, $x, $y) {
         $memcacheModel = new Memcache();
         $data = $memcacheModel->getData('plateaus');

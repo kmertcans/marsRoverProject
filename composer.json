@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "phpunit/phpunit": "^6"
+    },
+    "require": {
+        "zircote/swagger-php": "^3.0"
     }
 }

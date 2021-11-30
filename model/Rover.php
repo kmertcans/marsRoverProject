@@ -23,6 +23,24 @@ class Rover {
         return $this->heading;
     }
         
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/getRover.php",
+    *          tags={"Rovers"},
+    *          @OA\RequestBody(
+    *              description="Gets rover details",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="roverId", type="number"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     )
+    * )
+    */
     public function getRover($id) { 
         $memcacheModel = new Memcache();
         $rovers = $memcacheModel->getData('rovers');
@@ -66,6 +84,25 @@ class Rover {
         return $counter;
     }
 
+    
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/getRoverState.php",
+    *          tags={"Rovers"},
+    *          @OA\RequestBody(
+    *              description="Gets rover state",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="roverId", type="number"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     )
+    * )
+    */
     public function getState($id) {
         $roverDetails = self::getRover($id);
         if (!$roverDetails) {
@@ -122,6 +159,25 @@ class Rover {
         $memcacheModel->setData('rovers',$data);
     }
     
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/createRover.php",
+    *          tags={"Rovers"},
+    *          @OA\RequestBody(
+    *              description="Creates a rover",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="plateauId", type="number"),
+    *             @OA\Property(property="position", type="string" , default="x, y, H"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     )
+    * )
+    */
     public function createRover($plateauId, $roverId, $name, $x, $y, $heading) {
         $this->plateauId = $plateauId;
         $this->id = $roverId;
@@ -167,6 +223,25 @@ class Rover {
         return $commands;
     }
     
+    
+    /**
+    *     @OA\Post(
+    *          path="/api/v1/sendCommandsToRover.php",
+    *          tags={"Rovers"},
+    *          @OA\RequestBody(
+    *              description="Send commands to all rovers",
+    *              required=true,
+    *          @OA\JsonContent(
+    *             type="object",
+    *             @OA\Property(property="commands", type="string" , default="LMLMLMLMM"),
+    *          ),
+    *     ),
+    *     @OA\Response(
+    *         response=405,
+    *         description="Invalid input",
+    *     )
+    * )
+    */
     public function applyCommandsToAllRovers($commands) {
         $rovers = self::getRovers();
         if ($rovers) {
