@@ -15,7 +15,7 @@ require_once("../../model/Response.php");
 
 $data = (new Request())->getContent();
 $responseModel = new Response();
- 
+
 if (isset($data->x) && isset($data->y)) {
     $x = $data->x;
     $y = $data->y;
