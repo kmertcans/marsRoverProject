@@ -1,1 +1,1 @@
-[![swagger](https://github.com/kmertcans/marsRoverProject/swagger.png)](#swagger)
+[![swagger](https://github.com/kmertcans/marsRoverProject/blob/main/swagger.jpeg)]
